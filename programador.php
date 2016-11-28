@@ -18,20 +18,25 @@ $urlListener = $server_address . $listener_page;
 $respuesta = file_get_contents($urlRequest);
 $tarea = json_decode($respuesta, true);
 
-if (isset($tarea)) {
+$sleepTime = 30;
 
-    switch ($tarea["comando"]) {
-        case "acc":
-            actuador($tarea["pin"], $tarea["valor"]);
-            break;
-        case "med":
-            sensor($tarea["pin"]);
-            break;
-        case "inf":
-            break;
-        default:
-            break;
+while (true) {
+
+    if (isset($tarea)) {
+        switch ($tarea["comando"]) {
+            case "acc":
+                actuador($tarea["pin"], $tarea["valor"]);
+                break;
+            case "med":
+                sensor($tarea["pin"]);
+                break;
+            case "inf":
+                break;
+            default:
+                break;
+        }
     }
+    sleep($sleepTime);
 }
 
 function actuador($pin, $valor) {

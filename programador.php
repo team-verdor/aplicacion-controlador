@@ -1,6 +1,7 @@
 <?php
 
-define(ARDUINO_PORT, "/dev/ttyACM0");
+defined("ARDUINO_PORT")
+or define("ARDUINO_PORT", "/dev/ttyACM0");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -8,7 +9,7 @@ error_reporting(E_ALL);
 //$ stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts
 //sudo chmod 777 /dev/ttyACM0
 
-$server_address = "http://192.168.1.85/aplicacion-web-v2";
+$server_address = "http://www.verdor.cl/controlador";
 $request_page = "/request.php";
 $listener_page = "/listener.php";
 
@@ -17,11 +18,9 @@ $urlListener = $server_address . $listener_page;
 
 $respuesta = file_get_contents($urlRequest);
 $tarea = json_decode($respuesta, true);
-
 $sleepTime = 30;
 
 while (true) {
-
     if (isset($tarea)) {
         switch ($tarea["comando"]) {
             case "acc":

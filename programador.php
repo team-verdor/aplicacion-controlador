@@ -1,6 +1,6 @@
 <?php
 
-define(ARDUINO_PORT, "/dev/ttyACM0");
+define("ARDUINO_PORT", "/dev/ttyACM0");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -37,6 +37,7 @@ if (isset($tarea)) {
         default:
             break;
     }
+    sleep($sleepTime);
 }
 sleep($sleepTime);
 }

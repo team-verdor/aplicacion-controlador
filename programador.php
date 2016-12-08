@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 //$ stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts
 //sudo chmod 777 /dev/ttyACM0
 
-$server_address = "http://192.168.1.85/aplicacion-web-v2";
+$server_address = "http://www.verdor.cl/controlador";
 $request_page = "/request.php";
 $listener_page = "/listener.php";
 
@@ -17,9 +17,12 @@ $urlListener = $server_address . $listener_page;
 
 $respuesta = file_get_contents($urlRequest);
 $tarea = json_decode($respuesta, true);
+$seguir = true;
+$sleepTime = 30;
+//$arduino_port = "/dev/ttyACM0";
 
+while ($seguir){
 if (isset($tarea)) {
-
     switch ($tarea["comando"]) {
         case "acc":
             actuador($tarea["pin"], $tarea["valor"]);
@@ -29,9 +32,13 @@ if (isset($tarea)) {
             break;
         case "inf":
             break;
+	case "exit":
+	    break;		
         default:
             break;
     }
+}
+sleep($sleepTime);
 }
 
 function actuador($pin, $valor) {

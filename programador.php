@@ -19,6 +19,7 @@ $urlListener = $server_address . $listener_page;
 $respuesta = file_get_contents($urlRequest);
 $tarea = json_decode($respuesta, true);
 $sleepTime = 30;
+//$arduino_port = "/dev/ttyACM0";
 
 while (true) {
     if (isset($tarea)) {
@@ -36,6 +37,8 @@ while (true) {
         }
     }
     sleep($sleepTime);
+}
+sleep($sleepTime);
 }
 
 function actuador($pin, $valor) {

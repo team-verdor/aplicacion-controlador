@@ -38,8 +38,6 @@ while (true) {
     }
     sleep($sleepTime);
 }
-sleep($sleepTime);
-}
 
 function actuador($pin, $valor) {
     $orden = "acc," . $pin . "," . $valor;
